@@ -1,0 +1,4 @@
+After running `PhobosInitial.script`, from report PhobosInitial.txt, initial orbit state of Phobos is:
+
+Phobos.UTCGregorian       Phobos.MarsMJ2000Eq.X     Phobos.MarsMJ2000Eq.Y     Phobos.MarsMJ2000Eq.Z     Phobos.MarsMJ2000Eq.VX    Phobos.MarsMJ2000Eq.VY    Phobos.MarsMJ2000Eq.VZ    
+01 Aug 2025 00:01:35.627   316066901.9813311         -19176369.89348193        -12021907.45089538        12.2015465776783          35.1982296795386          16.00245791084935         
