@@ -2,3 +2,29 @@ After running `PhobosInitial.script`, from report PhobosInitial.txt, initial orb
 
 Phobos.UTCGregorian       Phobos.MarsInertial.X     Phobos.MarsInertial.Y     Phobos.MarsInertial.Z     Phobos.MarsInertial.VX    Phobos.MarsInertial.VY    Phobos.MarsInertial.VZ    
 01 Aug 2025 01:00:00.000   9127.931584945434         -2611.472995164269        -168.1209788313199        0.5644805983655178        2.033781123837515         0.0120589048637697      
+
+Using a proxy spacecraft with same Cartesian state, obtain Keplerian elements:
+SMA: 9380.700947715712 km
+ECC: 0.01464139216519503
+INC: 1.063528479658454 deg
+RAAN: 56.563588340819 deg
+AOP: 74.73428568137575 deg
+TA: 212.7336374490143 deg
+
+Propagate this to periapsis, from Mission -> Command Summary, obtain state at periapsis:
+
+        Time System   Gregorian                     Modified Julian  
+        ----------------------------------------------------------------------    
+        UTC Epoch:    01 Aug 2025 04:07:50.643      30888.6721139256
+
+        Cartesian State                       Keplerian State
+        ---------------------------           -------------------------------- 
+        X  =  -6197.0925002296 km             SMA  =   9380.9140595193 km
+        Y  =   6847.1448961802 km             ECC  =   0.0153829373133
+        Z  =   166.07083077293 km             INC  =   1.0634682404511 deg
+        VX =  -1.6086227957635 km/sec         RAAN =   56.514973136597 deg
+        VY =  -1.4561461385135 km/sec         AOP  =   75.634456180911 deg
+        VZ =   0.0099917320643 km/sec         TA   =   360.00000000000 deg
+                                              MA   =   360.00000000000 deg
+                                              EA   =   360.00000000000 deg
+
