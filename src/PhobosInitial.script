@@ -40,15 +40,15 @@ GMAT Phobos.3DModelScale = 1;
 
 Create Spacecraft Spacecraft;
 GMAT Spacecraft.DateFormat = UTCGregorian;
-GMAT Spacecraft.Epoch = '31 Jul 2025 23:59:00.000';
-GMAT Spacecraft.CoordinateSystem = MarsMJ2000Eq;
+GMAT Spacecraft.Epoch = '31 Jul 2025 23:00:00.000';
+GMAT Spacecraft.CoordinateSystem = MarsInertial;
 GMAT Spacecraft.DisplayStateType = Keplerian;
-GMAT Spacecraft.SMA = 7000.000000000006;
-GMAT Spacecraft.ECC = 8.710007450358356e-016;
-GMAT Spacecraft.INC = 0;
-GMAT Spacecraft.RAAN = 0;
+GMAT Spacecraft.SMA = 6999.999999946495;
+GMAT Spacecraft.ECC = 3.845906517335381e-012;
+GMAT Spacecraft.INC = 35.75943634963473;
+GMAT Spacecraft.RAAN = 182.4787466625419;
 GMAT Spacecraft.AOP = 0;
-GMAT Spacecraft.TA = 0;
+GMAT Spacecraft.TA = 126.3793804941731;
 GMAT Spacecraft.DryMass = 10;
 GMAT Spacecraft.Cd = 2.2;
 GMAT Spacecraft.Cr = 1.8;
@@ -64,18 +64,11 @@ GMAT Spacecraft.CrSigma = 1e+070;
 GMAT Spacecraft.Id = 'SatId';
 GMAT Spacecraft.Attitude = CoordinateSystemFixed;
 GMAT Spacecraft.SPADSRPScaleFactor = 1;
-GMAT Spacecraft.ModelFile = 'aura.3ds';
-GMAT Spacecraft.ModelOffsetX = 0;
-GMAT Spacecraft.ModelOffsetY = 0;
-GMAT Spacecraft.ModelOffsetZ = 0;
-GMAT Spacecraft.ModelRotationX = 0;
-GMAT Spacecraft.ModelRotationY = 0;
-GMAT Spacecraft.ModelRotationZ = 0;
-GMAT Spacecraft.ModelScale = 1;
 GMAT Spacecraft.AttitudeDisplayStateType = 'Quaternion';
 GMAT Spacecraft.AttitudeRateDisplayStateType = 'AngularVelocity';
-GMAT Spacecraft.AttitudeCoordinateSystem = EarthMJ2000Eq;
+GMAT Spacecraft.AttitudeCoordinateSystem = MarsInertial;
 GMAT Spacecraft.EulerAngleSequence = '321';
+
 
 
 
@@ -126,45 +119,13 @@ GMAT MarsPhobosRotating.ZAxis = N;
 GMAT MarsPhobosRotating.Primary = Mars;
 GMAT MarsPhobosRotating.Secondary = Phobos;
 
-Create CoordinateSystem MarsMJ2000Eq;
-GMAT MarsMJ2000Eq.Origin = Mars;
-GMAT MarsMJ2000Eq.Axes = MJ2000Eq;
+Create CoordinateSystem MarsInertial;
+GMAT MarsInertial.Origin = Mars;
+GMAT MarsInertial.Axes = BodyInertial;
 
 %----------------------------------------
 %---------- Subscribers
 %----------------------------------------
-
-Create OrbitView MarsOrbitView;
-GMAT MarsOrbitView.SolverIterations = Current;
-GMAT MarsOrbitView.UpperLeft = [ 0.00411764705882353 0 ];
-GMAT MarsOrbitView.Size = [ 0.7994117647058824 0.85 ];
-GMAT MarsOrbitView.RelativeZOrder = 86;
-GMAT MarsOrbitView.Maximized = false;
-GMAT MarsOrbitView.Add = {Spacecraft, Mars, Phobos};
-GMAT MarsOrbitView.CoordinateSystem = MarsMJ2000Eq;
-GMAT MarsOrbitView.DrawObject = [ true true true ];
-GMAT MarsOrbitView.DataCollectFrequency = 1;
-GMAT MarsOrbitView.UpdatePlotFrequency = 10000;
-GMAT MarsOrbitView.NumPointsToRedraw = 0;
-GMAT MarsOrbitView.ShowPlot = true;
-GMAT MarsOrbitView.MaxPlotPoints = 20000;
-GMAT MarsOrbitView.ShowLabels = true;
-GMAT MarsOrbitView.ViewPointReference = Mars;
-GMAT MarsOrbitView.ViewPointVector = [ 0 0 30000 ];
-GMAT MarsOrbitView.ViewDirection = Mars;
-GMAT MarsOrbitView.ViewScaleFactor = 1;
-GMAT MarsOrbitView.ViewUpCoordinateSystem = MarsMJ2000Eq;
-GMAT MarsOrbitView.ViewUpAxis = Z;
-GMAT MarsOrbitView.EclipticPlane = Off;
-GMAT MarsOrbitView.XYPlane = Off;
-GMAT MarsOrbitView.WireFrame = Off;
-GMAT MarsOrbitView.Axes = On;
-GMAT MarsOrbitView.Grid = Off;
-GMAT MarsOrbitView.SunLine = Off;
-GMAT MarsOrbitView.UseInitialView = On;
-GMAT MarsOrbitView.StarCount = 7000;
-GMAT MarsOrbitView.EnableStars = On;
-GMAT MarsOrbitView.EnableConstellations = Off;
 
 Create ReportFile PhobosReport;
 GMAT PhobosReport.SolverIterations = Current;
@@ -182,11 +143,43 @@ GMAT PhobosReport.Delimiter = ' ';
 GMAT PhobosReport.ColumnWidth = 23;
 GMAT PhobosReport.WriteReport = true;
 
+Create OrbitView MarsOrbitView;
+GMAT MarsOrbitView.SolverIterations = Current;
+GMAT MarsOrbitView.UpperLeft = [ 0.002941176470588235 0 ];
+GMAT MarsOrbitView.Size = [ 0.8 0.85 ];
+GMAT MarsOrbitView.RelativeZOrder = 155;
+GMAT MarsOrbitView.Maximized = false;
+GMAT MarsOrbitView.Add = {Spacecraft, Mars, Phobos};
+GMAT MarsOrbitView.CoordinateSystem = MarsInertial;
+GMAT MarsOrbitView.DrawObject = [ true true true ];
+GMAT MarsOrbitView.DataCollectFrequency = 1;
+GMAT MarsOrbitView.UpdatePlotFrequency = 50;
+GMAT MarsOrbitView.NumPointsToRedraw = 0;
+GMAT MarsOrbitView.ShowPlot = true;
+GMAT MarsOrbitView.MaxPlotPoints = 20000;
+GMAT MarsOrbitView.ShowLabels = true;
+GMAT MarsOrbitView.ViewPointReference = Mars;
+GMAT MarsOrbitView.ViewPointVector = [ 0 0 30000 ];
+GMAT MarsOrbitView.ViewDirection = Mars;
+GMAT MarsOrbitView.ViewScaleFactor = 1;
+GMAT MarsOrbitView.ViewUpCoordinateSystem = MarsInertial;
+GMAT MarsOrbitView.ViewUpAxis = Z;
+GMAT MarsOrbitView.EclipticPlane = Off;
+GMAT MarsOrbitView.XYPlane = Off;
+GMAT MarsOrbitView.WireFrame = Off;
+GMAT MarsOrbitView.Axes = On;
+GMAT MarsOrbitView.Grid = Off;
+GMAT MarsOrbitView.SunLine = Off;
+GMAT MarsOrbitView.UseInitialView = On;
+GMAT MarsOrbitView.StarCount = 7000;
+GMAT MarsOrbitView.EnableStars = Off;
+GMAT MarsOrbitView.EnableConstellations = Off;
+
 
 %----------------------------------------
 %---------- Mission Sequence
 %----------------------------------------
 
 BeginMissionSequence;
-Propagate 'Prop 1 Minute' MarsProp(Spacecraft) {Spacecraft.ElapsedSecs = 60};
-Report 'Phobos Orbit Report' PhobosReport Phobos.UTCGregorian Phobos.MarsMJ2000Eq.X Phobos.MarsMJ2000Eq.Y Phobos.MarsMJ2000Eq.Z Phobos.MarsMJ2000Eq.VX Phobos.MarsMJ2000Eq.VY Phobos.MarsMJ2000Eq.VZ;
+Propagate 'Prop 1 Minute' MarsProp(Spacecraft) {Spacecraft.ElapsedSecs = 3600};
+Report 'Phobos Orbit Report' PhobosReport Phobos.UTCGregorian Phobos.MarsInertial.X Phobos.MarsInertial.Y Phobos.MarsInertial.Z Phobos.MarsInertial.VX Phobos.MarsInertial.VY Phobos.MarsInertial.VZ;
