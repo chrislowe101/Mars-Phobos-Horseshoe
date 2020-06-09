@@ -1,0 +1,19 @@
+So far, have implemented Section 3 (initial conditions) and single iteration of Section 2. Verify these are working
+
+Need to implement multiple iterations of Section 2 - note each time step is defind to be 1, corresponding to about 1.89 years. Approx 79 iterations required to get moderate amplitude cycle of 148 years.
+
+Find residual after one near-periodic orbit in Section 4 - calculate Delta from initial position and velocity. Period of libration is time at which velocity residual is 0 at closest approach to starting point
+
+Apply correction to initial velocity to minimise residual
+
+Note plots show single points for each cycle - this indicates speed of orbit. Velocity is lowest near turning points, highest near libration point
+
+Look towards different starting conditions for L3 point rather than L4/L5 used here.
+
+Table 2 shows Jacobi constants for each. Highlighted that critical horseshoe orbit (boundary between horseshoe and tadpole) occurs for C equal to L3 value
+
+Equations 45-47 are for translating to heliocentric inertial frame. Note Table IX includes orbital element used by trojan - verify these match
+
+Investigate impact of eccentric orbit. Perhaps it doesn't really matter, since here we use normalised orbit radius of 1? Implication may be that distance is proportional to radius at any point in time, so even a smooth horseshoe will show variance in eccentric orbit. Possible approach is to obtain epicycle that deliberately counteracts this effect. 
+
+Follow on script for Section 6 - Fourier series representation
