@@ -6,12 +6,12 @@ N = sqrt(1 + M);        % Angular momentum of Jupiter
 P = 2*pi/N;             % Period of Jupiter
 
 % Trojan starting conditions
-a0;
-b0;
-a1;
-b1;
+a0 = 0.47;
+b0 = 0.917986928;
+a1 = 0.077336855;
+b1 = 0.044371494;
 
-% Find other coefficients
+% Find other initial coefficients
 c0 = sqrt(a0^2 + b0^2);
 d0 = sqrt((a0-1)^2 + b0^2);
 e0 = M * (c0^-3 - 1);
@@ -21,19 +21,78 @@ a = [a0 a1];
 b = [b0 b1];
 c = [c0];
 d = [d0];
-for n=1:10
+
+% Recursively find higher order coefficients
+for n = 1:10            % hard limit for now, but should a stopping condtion for when all six coefficients are < some epsilon
+
+    % Find next c coefficient
     suma = 0;
     sumb = 0;
     sumc = 0;
-    sumd = 0;
-    sume = 0;
-    sumf = 0;
-    for v=0:n
+    for v = 0:n
         suma = suma + a(v+1)*a(n-v+1);
         sumb = sumb + b(v+1)*b(n-v+1);
-        suma = suma + (v+1)*c(n-v+1);
-        suma = suma + a(v+1)*a(n-v+1);
-        
     end
-    c(n+1) = () / (2*c0);
+    if (n-1) >= 1
+        for v = 1:(n-1)
+            sumc = sumc + c(v+1)*c(n-v+1);
+        end
+    end
+    c(n+1) = (suma + sumb - sumc) / (2*c(1));
+    
+    % Find next d coefficient
+    sumc = 0;
+    sumd = 0;
+    for v = 0:n
+        sumc = sumc + c(v+1)*c(n-v+1);
+    end
+    for v = 0:(n-1)
+        sumd = sumd + d(v+1)*d(n-v+1);
+    end
+    d(n+1) = (sumc - sumd - 2*a(n+1)) / (2*d(1));
+    
+    % Find next e coefficient
+    sume1 = 0;
+    sume2 = 0;
+    for v = 1:n
+        sume1 = sume1 + v*c(v+1)*e(n-v+1);
+    end
+    if (n-1) >= 1
+        for v = 1:(n-1)
+            sume2 = sume2 + v*e(v+1)*c(n-v+1);
+        end
+    end
+    e(n+1) = (3*sume1 + sume2 + 3*M*n*c(n+1)) / (-n*c(1));
+    
+    % Find next f coefficient
+    sumf1 = 0;
+    sumf2 = 0;
+    for v = 1:n
+        sumf1 = sumf1 + v*d(v+1)*f(n-v+1);
+    end
+    if (n-1) >= 1
+        for v = 1:(n-1)
+            sumf2 = sumf2 + v*f(v+1)*d(n-v+1);
+        end
+    end
+    f(n+1) = (3*sumf1 + sumf2 + 3*n*d(n+1)) / (-n*d(1));
+    
+    % Find next a coefficient
+    suma = 0;
+    for v = 0:(n-1)
+        suma = suma + a(v+1)*(e(n-v) + f(n-v));
+    end
+    a(n+2) = (suma - 2*N*n*b(n+1) - f(n)) / (-n*(n+1));
+    
+    % Find next b coefficient
+    sumb = 0;
+    for v = 0:(n-1)
+        sumb = sumb + b(v+1)*(e(n-v) + f(n-v));
+    end
+    b(n+2) = (sumb + 2*N*n*a(n+1)) / (-n*(n+1));
+    
 end
+
+% TEST - compare to paper results (starting conditions should yield d0 = 1.06 and residuals as per Table II, Table VIII
+a
+b
