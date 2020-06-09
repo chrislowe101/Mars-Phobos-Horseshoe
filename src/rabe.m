@@ -96,3 +96,18 @@ end
 % TEST - compare to paper results (starting conditions should yield d0 = 1.06 and residuals as per Table II, Table VIII
 a
 b
+
+% Find position and velocity at this time step
+p = sum(a);
+q = sum(b);
+p_dot = 0;
+q_dot = 0;
+for n = 1:length(a)
+    p_dot = p_dot + n*a(n+1);
+    q_dot = q_dot + n*b(n+1);
+end
+
+% Calculate Jacobi constant
+r = sqrt(p^2 + q^2);        % Distance from Jupiter to Trojan
+s = sqrt((p-1)^2 + q^2);    % Distance from Sun to Trojan
+C = M*(r^2 + 2/r) + (s^2 + 2/s) - p_dot^2 - q_dot^2;
