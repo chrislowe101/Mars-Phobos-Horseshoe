@@ -21,6 +21,8 @@ a = [a0 a1];
 b = [b0 b1];
 c = [c0];
 d = [d0];
+e = [e0];
+f = [f0];
 
 % Recursively find higher order coefficients
 for n = 1:10            % hard limit for now, but should a stopping condtion for when all six coefficients are < some epsilon
